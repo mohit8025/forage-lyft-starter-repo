@@ -2,7 +2,8 @@ from serviceable import Serviceable
 
 
 class Car(Serviceable):
-    def __init__(self, battery, engine):
+    def __init__(self, battery, engine, tires):
+        self.tires = tires
         self.engine = engine
         self.battery = battery
 

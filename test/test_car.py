@@ -6,9 +6,11 @@ from battery.spindler_battery import SpindlerBattery
 from engine.capulet_engine import CapuletEngine
 from engine.sternman_engine import SternmanEngine
 from engine.willoughby_engine import WilloughbyEngine
+from tires.carrigan_tires import CarriganTires
+from tires.octoprime_tires import OctoprimeTires
 
 
-class TestEngine(unittest.TestCase):
+class TestComponents(unittest.TestCase):
     def test_CapuletEngine_should_be_serviced(self):
         last_service_mileage = 30000
         current_mileage = 60001
@@ -76,3 +78,23 @@ class TestEngine(unittest.TestCase):
 
         battery = NubbinBattery(today, last_service_date)
         self.assertFalse(battery.needs_service())
+
+    def test_CarriganTires_should_be_serviced(self):
+        tire_array = {0.1,0.5,0.6,0.9}
+        tires = CarriganTires(tire_array)
+        self.assertTrue(tires.needs_service())
+
+    def test_CarriganTires_should_not_be_serviced(self):
+        tire_array = {0.1,0.5,0.6,0.7}
+        tires = CarriganTires(tire_array)
+        self.assertFalse(tires.needs_service())
+
+    def test_OctoprimeTires_should_be_serviced(self):
+        tire_array = [0.8, 0.8, 0.8, 0.7]
+        tires = OctoprimeTires(tire_array)
+        self.assertTrue(tires.needs_service())
+
+    def test_OctoprimeTires_should_not_be_serviced(self):
+        tire_array = {0.9,0.8,0.3,0.9}
+        tires = OctoprimeTires(tire_array)
+        self.assertFalse(tires.needs_service())
